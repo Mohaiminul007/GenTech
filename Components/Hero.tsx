@@ -11,17 +11,16 @@ const Hero = () => {
         backgroundRepeat: `repeat`,
       }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgb(140,69,255,.5)_15%,rgb(14,0,36,.5)_78%,transparent)] "></div>
+      <div className="absolute bg-black inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgb(140,69,255,.5)_10%,rgb(14,0,36,.5)_90%,transparent)] "></div>
       <div className="container  mx-auto relative mt-16">
-        <h1 className="text-6xl mx-auto max-w-2xl mb-3 md:leading-none font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text text-center">
+        <h1 className="text-3xl max-w-sm md:text-4xl lg:text-6xl mx-auto md:max-w-2xl mb-3 md:leading-none font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text text-center">
           Grow Your Business With Cutting-Edge Software Solutions
         </h1>
-        <p className="text-center mx-auto max-w-xl">
+        <p className="text-center text-sm text-gray-300 mx-auto max-w-sm md:max-w-xl">
           Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
           faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi
           pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
-          tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
-          Iaculis massa nisl malesuada .
+          .
         </p>
         <div className="flex justify-center mt-5">
           <Button>Connect Now</Button>

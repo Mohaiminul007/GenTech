@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 
-html.dark,
-body.dark {
-  background-color: #000000 !important;
+body{
+  background-color: rgb(0, 0, 0);
+  color: white;
 }
-
 .NavLink {
   @apply text-xl mx-2 text-center
+}
+
+@theme {
+  --bg-color: #0e0320;
 }
 

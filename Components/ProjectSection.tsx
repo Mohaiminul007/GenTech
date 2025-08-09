@@ -1,5 +1,4 @@
 // components/OurProjects.tsx
-
 import React from "react";
 
 /**
@@ -10,7 +9,8 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  link: string; // Optional: Link to the project details page
+  link: string;
+  backgroundImage: string; // Added background image property
 }
 
 /**
@@ -23,18 +23,21 @@ const sampleProjects: Project[] = [
     title: "Innovative AI Platform",
     description: "A cutting-edge AI solution for data analysis and prediction.",
     link: "/projects/ai-platform",
+    backgroundImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop&auto=format",
   },
   {
     id: "2",
     title: "E-commerce Redesign",
     description: "Modernizing an online retail experience with new UI/UX.",
     link: "/projects/ecommerce-redesign",
+    backgroundImage: "", // Empty URL to demonstrate skeleton
   },
   {
     id: "3",
     title: "Mobile Game Development",
     description: "Creating an engaging mobile game for iOS and Android.",
     link: "/projects/mobile-game",
+    backgroundImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&h=300&fit=crop&auto=format",
   },
 ];
 
@@ -48,35 +51,57 @@ const ProjectSection: React.FC = () => {
             Our project
           </h1>
         </div>
-        <span
-          
-          className=" flex  mb-3 justify-end  "
-          
-        >
-            <a href="/projects" aria-label="See more projects"  className="text-lg text-gray-400 hover:text-white transition-colors duration-300">
-                See more
-            </a>
+        <span className="flex mb-3 justify-end">
+          {/* <a href="/projects" aria-label="See more projects"  className="text-lg text-gray-400 hover:text-white transition-colors duration-300">
+              See more
+          </a> */}
         </span>
+
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sampleProjects.map((project) => (
             <div
-              key={project.id} // Unique key for each mapped element is crucial for React performance
-              className="bg-[#0E0320] bg-opacity-50 rounded-xl shadow-lg p-8 h-64 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+              key={project.id}
+              className="relative rounded-xl shadow-lg h-64 overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl group cursor-pointer"
             >
-              <div>
-                <h3 className="text-2xl font-semibold mb-2 text-purple-300">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 text-base">{project.description}</p>
+              {/* Background Image or Skeleton */}
+              {project.backgroundImage && project.backgroundImage.trim() !== "" ? (
+                <div
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url(${project.backgroundImage})`,
+                  }}
+                />
+              ) : (
+                /* Skeleton background */
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 animate-pulse">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-500/20 to-transparent animate-shimmer" />
+                </div>
+              )}
+              
+              {/* Dark overlay for better text readability */}
+              <div className="absolute inset-0  bg-opacity-40 transition-opacity duration-300 group-hover:bg-opacity-60" />
+              
+              {/* Content overlay - default state */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-between transition-opacity duration-300 group-hover:opacity-0">
+                <div>
+                  <h3 className="text-2xl font-semibold mb-2 text-white drop-shadow-lg">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-200 text-base drop-shadow-md">{project.description}</p>
+                </div>
               </div>
-              <a
-                href={project.link}
-                className="self-end text-purple-400 hover:text-purple-200 transition-colors duration-300 mt-4"
-                aria-label={`Learn more about ${project.title}`}
-              >
-                Learn More &rarr;
-              </a>
+
+              {/* Hover overlay - "Visit" state */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <a
+                  href={project.link}
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 px-8 rounded-full text-xl transition-colors duration-300 shadow-lg"
+                  aria-label={`Visit ${project.title}`}
+                >
+                  Visit
+                </a>
+              </div>
             </div>
           ))}
         </div>
